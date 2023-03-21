@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.Map.Entry;
  
 public class Tutorial extends Application {
+	File file = new File("theraven.txt");
 	static ArrayList<String> lines = new ArrayList<>();
 	static HashMap<String, Integer> wordMap = new HashMap<String, Integer>();
 	static LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
@@ -26,7 +27,7 @@ public class Tutorial extends Application {
         Scene scene = new Scene(layout, 300, 300);        
 
         Button button = new Button("Click me to count words!");
-        button.setOnAction(e -> wordOccurrence());
+        button.setOnAction(e -> wordOccurrence(file));
          
         layout.getChildren().addAll(button);
          
@@ -35,10 +36,10 @@ public class Tutorial extends Application {
         primaryStage.show();
     }   
     
-    public static void wordOccurrence() {
+    public LinkedHashMap<String, Integer> wordOccurrence(File file) {
     	
     	try {
-   	      File file = new File("theraven.txt");
+//   	      File file = new File("theraven.txt");
    	      Scanner scan = new Scanner(file, "UTF-8");
    	      //add lines to array list "lines"
    	      while (scan.hasNextLine()) {	      
@@ -80,10 +81,13 @@ public class Tutorial extends Application {
                     sortedMap.put(entry.getKey(), num); //add "wordMap" keys and sorted "list" elements to "sortedMap"
                 }
             }
-        }               
+        }
+
         	        
         sortedMap.forEach( (key, value) -> {
             System.out.printf("%-20s %d%n", key, value);
         } );
+        
+        return sortedMap;
     }     
 }
