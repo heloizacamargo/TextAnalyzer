@@ -7,7 +7,13 @@ import javafx.scene.layout.StackPane;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
- 
+
+/**
+ * Tutorial reads the text file and counts how many times a word appears.
+ * 
+ * @author Heloiza Camargo
+ */
+
 public class Tutorial extends Application {
 	File file = new File("theraven.txt");
 	static ArrayList<String> lines = new ArrayList<>();
@@ -36,12 +42,11 @@ public class Tutorial extends Application {
         primaryStage.show();
     }   
     
+
     public LinkedHashMap<String, Integer> wordOccurrence(File file) {
     	
     	try {
-//   	      File file = new File("theraven.txt");
    	      Scanner scan = new Scanner(file, "UTF-8");
-   	      //add lines to array list "lines"
    	      while (scan.hasNextLine()) {	      
    	    	  lines.add(scan.nextLine());
    	      }	    
@@ -54,31 +59,30 @@ public class Tutorial extends Application {
    	    }
     	
     	for(String line: lines) {
-	    	//Remove punctuation, change all to lower case
 	    	String[] words = line.replaceAll("\\p{IsPunctuation}", " ").toLowerCase().split("\\s+");
 	    	for(String w: words) {
 	    		if(!(w.isEmpty())) {
 		    		if(!(wordMap.containsKey(w))) {
-		    			wordMap.put(w, 1); //if word is not in map: add word to map
+		    			wordMap.put(w, 1);
 		    		}
 		    		else {
-		    			wordMap.put(w, wordMap.get(w) + 1); //If word already in map: add +1 to value
+		    			wordMap.put(w, wordMap.get(w) + 1);
 		    		}	    	
 	    		}
 	    	}	
 	    }
     	
     	for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
-            list.add(entry.getValue()); //add values to array list "list"
+            list.add(entry.getValue());
         }
  	    
-        Collections.sort(list); //sort smallest to largest
-        Collections.reverse(list); //sort largest to smallest
+        Collections.sort(list);
+        Collections.reverse(list); 
         
         for (int num : list) {
             for (Entry<String, Integer> entry : wordMap.entrySet()) {
                 if (entry.getValue().equals(num)) {
-                    sortedMap.put(entry.getKey(), num); //add "wordMap" keys and sorted "list" elements to "sortedMap"
+                    sortedMap.put(entry.getKey(), num);
                 }
             }
         }
